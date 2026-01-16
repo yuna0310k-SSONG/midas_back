@@ -59,7 +59,8 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
     const port = process.env.PORT || 3001;
-    await app.listen(port);
+    const host = '0.0.0.0'; // Fly.io에서 모든 인터페이스에서 수신 대기
+    await app.listen(port, host);
     // #region agent log
     fetch('http://127.0.0.1:7242/ingest/4f761653-75df-4724-8245-3492ee79f545',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'main.ts:28',message:'Server started successfully',data:{port},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
     // #endregion
